@@ -1,6 +1,10 @@
 :root {
-    --scale: 400px;
+    --scale: 50vw;
     --rouletteSpin: 0deg;
+	--pinkColor: #F2668B;
+	--whiteColor: #F2F2F2;
+	--blackColor: #0D0D0D;
+	--spinButtonSize: 5.5vw;
 }
 
 * {
@@ -18,7 +22,8 @@ body {
 }
 
 h1 {
-    user-select: none; 
+    user-select: none;
+	font-size: 3rem;
 }
 
 #container {
@@ -28,15 +33,21 @@ h1 {
     justify-content: center;
     align-items: center;
     height: 100%;
+	padding: 1rem;
 }
 
 #winner-panel {
     position: absolute;
+	background-color: var(--pinkColor);
+	color: var(--whiteColor);
+	border: 2px var(--blackColor) solid;
+	border-radius: 20%;
     left: -150px;
 	top: -40px;
     min-height: 55px;
 	width: 300px;
 	font-weight: bold;
+	font-size: 1.2rem;
 }
 
 #score {
@@ -44,7 +55,7 @@ h1 {
 	z-index: 10;
 	top: -20px;
 	background-color: black;
-	height: 100px;
+	height: 8vh;
 	width: 5px;
 	pointer-events: none;
 }
@@ -66,10 +77,10 @@ h1 {
     position: absolute;
 	background-color: rgb(255, 76, 76);
 	border-radius: 50%;
-	width: 60px;
-	height: 60px;
-	top: calc(var(--scale) / 2 - 60px / 2 );
-	left: calc(var(--scale) / 2 - 60px / 2 );
+	width: var(--spinButtonSize);
+	height: var(--spinButtonSize);
+	top: calc(var(--scale) / 2 - var(--spinButtonSize) / 2 );
+	left: calc(var(--scale) / 2 - var(--spinButtonSize) / 2 );
 	z-index: 2;
 	text-align: center;
 	cursor: pointer;
@@ -92,12 +103,11 @@ h1 {
 
 .name {
     margin: 0;
-	padding-top: 30px;
+	padding-top: 3vh;
 	color: white;
 	text-align: center;
 	height: calc(var(--scale) / 2);
 	position: absolute;
-	/*bottom: 80%;*/
 	top: -0%;
 	left: calc(var(--scale) / 4 );
 	transform-origin: bottom center;
@@ -109,7 +119,7 @@ h1 {
 .separator {
     position: absolute;
 	left: calc(var(--scale) / 2 - 1px);
-	height: calc(var(--scale) / 2);;
+	height: calc(var(--scale) / 2);
 	width: 4px;
 	transform-origin: center bottom;
 	background-color: rgb(0, 0, 0);
@@ -126,7 +136,49 @@ h1 {
 }
 
 @keyframes spin {
-	100%{
+	100% {
 		transform: rotate( var(--rouletteSpin) );
 	}
+}
+
+@media (min-width: 1200px) {
+    :root {
+        --scale: 500px !important;
+    }
+}
+
+@media (min-width: 777px) and (max-width: 1374px) {
+    :root {
+		--spinButtonSize: 7vw;
+	}
+}
+
+@media (max-width: 768px) {
+    :root {
+        --scale: 70vw;
+		--spinButtonSize: 9vw;
+    }
+
+    h1 {
+        font-size: 6vw;
+    }
+
+    .name {
+        font-size: calc(var(--scale) / 30);
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --scale: 90vw;
+		--spinButtonSize: 17vw;
+    }
+
+    h1 {
+        font-size: 7vw;
+    }
+
+    .name {
+        font-size: calc(var(--scale) / 35);
+    }
 }
