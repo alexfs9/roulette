@@ -19,9 +19,6 @@ const colors = [
     "#FFF233"
 ];
 
-let scale = screen.width < 550 ? screen.width * 0.7 : 400;
-root.style.setProperty("--scale", scale + "px");
-
 function sort() {
     sorting = true;
     loadingAnimation = setInterval(() => {
