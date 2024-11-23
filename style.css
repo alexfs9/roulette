@@ -1,0 +1,132 @@
+:root {
+    --scale: 400px;
+    --rouletteSpin: 0deg;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+h1 {
+    user-select: none; 
+}
+
+#container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+#winner-panel {
+    position: absolute;
+    left: -150px;
+	top: -40px;
+    min-height: 55px;
+	width: 300px;
+	font-weight: bold;
+}
+
+#score {
+    position: absolute;
+	z-index: 10;
+	top: -20px;
+	background-color: black;
+	height: 100px;
+	width: 5px;
+	pointer-events: none;
+}
+
+#roulette {
+    position: relative;
+    width: var(--scale);
+    height: var(--scale);
+    border: 2px solid black;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+#options-container {
+    transform-origin: center;
+}
+
+#sort {
+    position: absolute;
+	background-color: rgb(255, 76, 76);
+	border-radius: 50%;
+	width: 60px;
+	height: 60px;
+	top: calc(var(--scale) / 2 - 60px / 2 );
+	left: calc(var(--scale) / 2 - 60px / 2 );
+	z-index: 2;
+	text-align: center;
+	cursor: pointer;
+	user-select: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 1px solid black;
+}
+
+.option {
+    position: absolute;
+	top: 0px;
+	left: 0px;
+	height: var(--scale);
+	width: var(--scale);
+	background-color: var(--color);
+	transform: rotate(var(--deg));
+}
+
+.name {
+    margin: 0;
+	padding-top: 30px;
+	color: white;
+	text-align: center;
+	height: calc(var(--scale) / 2);
+	position: absolute;
+	/*bottom: 80%;*/
+	top: -0%;
+	left: calc(var(--scale) / 4 );
+	transform-origin: bottom center;
+	font-size: calc(var(--scale) / 25 );
+	text-overflow: clip;
+	pointer-events: none;
+}
+
+.separator {
+    position: absolute;
+	left: calc(var(--scale) / 2 - 1px);
+	height: calc(var(--scale) / 2);;
+	width: 4px;
+	transform-origin: center bottom;
+	background-color: rgb(0, 0, 0);
+	z-index: 1;
+	border-radius: 2px;
+}
+
+.spin {
+    animation-name: spin;
+	animation-duration: 5s;
+	animation-timing-function: cubic-bezier(0.1, 0, 0.18, 0.99);;
+	animation-direction: normal;
+	animation-fill-mode: forwards;
+}
+
+@keyframes spin {
+	100%{
+		transform: rotate( var(--rouletteSpin) );
+	}
+}
