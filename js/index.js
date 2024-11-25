@@ -1,13 +1,19 @@
 import { options } from './options.js';
-import { getCurrentRotation, getPositionForProbability, probabilityToGrades } from './utilities.js';
+import { getCurrentRotation, getPositionForProbability, probabilityToGrades, getDate } from './utilities.js';
 
-const roulette = document.getElementById('roulette');
 const root = document.documentElement;
-let optionsContainer;
+const roulette = document.getElementById('roulette');
 const winnerText = document.getElementById('winner-text');
+
+const modal = document.getElementById('modal');
+const copyBtn = document.getElementById('copy');
+
+let optionsContainer;
 let winner = '';
 let loadingAnimation;
 let sorting = false;
+let awardName = document.getElementById('award-name');
+let dateText = document.getElementById('date-text');
 const colors = [
     "#FF5733",
     "#33FF57",
@@ -54,6 +60,10 @@ roulette.addEventListener('animationend', () => {
     sorting = false;
     winnerText.textContent = winner;
     clearInterval(loadingAnimation);
+
+    modal.style.display = 'flex';
+    awardName.textContent = winner;
+    dateText.textContent = getDate();
 });
 
 document.getElementById('sort').addEventListener('click', () => {
@@ -94,5 +104,20 @@ function loadRoulette() {
         winnerText.textContent = '¡Comienza a girar!';
     });
 }
+
+copyBtn.addEventListener('click', async () => {
+    let modalContent = document.getElementById('modal-content');
+    let canvas = await html2canvas(modalContent);
+
+    canvas.toBlob(async (blob) => {
+        try {
+            const capture = new ClipboardItem({ 'image/png': blob });
+            await navigator.clipboard.write([capture]);
+            alert('Imagen copiada al portapapeles.');
+        } catch (error) {
+            console.log(error);
+        }
+    });
+});
 
 loadRoulette();

@@ -1,5 +1,5 @@
 // Devuelve la rotación en grados de un elemento
-export function getCurrentRotation(el){
+export function getCurrentRotation(el) {
     var st = window.getComputedStyle(el, null);
     var tm = st.getPropertyValue("-webkit-transform") ||
         st.getPropertyValue("-moz-transform") ||
@@ -16,16 +16,16 @@ export function getCurrentRotation(el){
 }
 
 // Recibe un Nº base 1 y devuelve un Nº base 360
-export function probabilityToGrades(probability){
+export function probabilityToGrades(probability) {
     return probability * 360 / 100;
 }
 
 // Recibe un Nº base 1 y devuelve radianes
-function probabilityToRadians(probability){
+function probabilityToRadians(probability) {
     return probability / 100 * 2 * Math.PI;
 }
 
-export function getPositionForProbability(probability){
+export function getPositionForProbability(probability) {
 	if(probability === 100){
 		return ''
 	}
@@ -61,4 +61,9 @@ export function getPositionForProbability(probability){
 		const x2 = Math.tan(probabilityToRadians(probability)) * 50 + 50;
 		return `clip-path: polygon(50% 0, ${x2}% 0, 50% 50%)`
 	}
+}
+
+export function getDate() {
+	let today = new Date();
+	return today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
 }
