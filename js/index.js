@@ -1,11 +1,12 @@
 import { options } from './options.js';
-import { getCurrentRotation, getPositionForProbability, probabilityToGrades, getDate } from './utilities.js';
+import { getCurrentRotation, getPositionForProbability, probabilityToGrades } from './utilities.js';
+import { savePlay, checkTimeAndClearData } from './timer.js';
 
 const root = document.documentElement;
 const roulette = document.getElementById('roulette');
 const winnerText = document.getElementById('winner-text');
 
-const modal = document.getElementById('modal');
+const awardModal = document.getElementById('award-modal');
 const copyBtn = document.getElementById('copy');
 
 let optionsContainer;
@@ -60,10 +61,8 @@ roulette.addEventListener('animationend', () => {
     sorting = false;
     winnerText.textContent = winner;
     clearInterval(loadingAnimation);
-
-    modal.style.display = 'flex';
-    awardName.textContent = winner;
-    dateText.textContent = getDate();
+    const play = savePlay(winner);
+    loadAwardModal(play);
 });
 
 document.getElementById('sort').addEventListener('click', () => {
@@ -105,6 +104,12 @@ function loadRoulette() {
     });
 }
 
+function loadAwardModal(play) {
+    awardModal.style.display = 'flex';
+    awardName.textContent = play.award;
+    dateText.textContent = play.dateToShow;
+}
+
 copyBtn.addEventListener('click', async () => {
     let modalContent = document.getElementById('modal-content');
     let canvas = await html2canvas(modalContent);
@@ -121,3 +126,12 @@ copyBtn.addEventListener('click', async () => {
 });
 
 loadRoulette();
+
+document.addEventListener('DOMContentLoaded', () => {
+    checkTimeAndClearData();
+    const data = localStorage.getItem('play');
+    if (data) {
+        loadAwardModal(JSON.parse(data));
+        console.log('Bloqueado, ya jugó', JSON.parse(data));
+    }
+});

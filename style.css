@@ -135,7 +135,7 @@ h1 {
 	animation-fill-mode: forwards;
 }
 
-#modal {
+#award-modal {
 	display: none;
 	position: fixed;
 	z-index: 2;

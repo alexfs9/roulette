@@ -62,8 +62,3 @@ export function getPositionForProbability(probability) {
 		return `clip-path: polygon(50% 0, ${x2}% 0, 50% 50%)`
 	}
 }
-
-export function getDate() {
-	let today = new Date();
-	return today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
-}
